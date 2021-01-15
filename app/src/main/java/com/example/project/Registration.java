@@ -37,8 +37,8 @@ public class Registration extends AppCompatActivity {
         setContentView(R.layout.activity_registration);
         rName=(EditText)findViewById(R.id.nameTxt);
         rAge=(EditText)findViewById(R.id.ageTxt);
-        rEmail=(EditText)findViewById(R.id.emailTxt);
-        rPassword=(EditText)findViewById(R.id.passwordTxt);
+        rEmail=(EditText)findViewById(R.id.registerEmailTxt);
+        rPassword=(EditText)findViewById(R.id.registerPasswordTxt);
         rPhoneNumber=(EditText)findViewById(R.id.registerPhoneTxt);
         progress=(ProgressBar)findViewById(R.id.registerProgressBar);
         registerBtn=(Button) findViewById(R.id.registerBtn);
@@ -99,7 +99,12 @@ public class Registration extends AppCompatActivity {
 
                                 }
                             });
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+
+
+                            // TODO
+
+
+                           ///// startActivity(new Intent(getApplicationContext(),MainActivity.class));
                         }else {
                             Toast.makeText(Registration.this,"Error"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             progress.setVisibility(View.GONE);

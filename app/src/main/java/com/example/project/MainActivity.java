@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         register =(TextView) findViewById(R.id.registerTxtView);
-        register.setOnClickListener(this);
+
 
         forgotPass = (TextView) findViewById(R.id.forgotTxtView);
         forgotPass.setOnClickListener(this);
@@ -47,61 +47,86 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         passwordEditText = (EditText) findViewById(R.id.passwordTxt);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
         passwordCheck =(CheckBox) findViewById(R.id.showPasswordBox);
+        auth=FirebaseAuth.getInstance();
 
+
+        BtnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email=emailEditText.getText().toString().trim();
+                String password=passwordEditText.getText().toString().trim();
+
+                if(TextUtils.isEmpty(email)){
+                    emailEditText.setError("Email is required");
+                    return;
+                }
+                if(TextUtils.isEmpty(password)){
+                    passwordEditText.setError("Password is required");
+                    return;
+                }
+                if(password.length()<6){
+                    passwordEditText.setError("Password should be more than or equal to 6 characters");
+                    return;
+                }
+                progress.setVisibility(View.VISIBLE);
+                //authenticatation
+
+                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            Toast.makeText(MainActivity.this,"logged in successfully",Toast.LENGTH_SHORT).show();
+
+                            //Redirected to home page in case of successful login
+                            /// startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                        }else {
+                            Toast.makeText(MainActivity.this,"Error"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                            progress.setVisibility(View.GONE);
+                        }
+                    }
+                });
+            }
+        });
+
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Registration.class));
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
 
-        switch (v.getId())
-        {
-            case R.id.registerTxtView:
-                startActivity(new Intent(this, Registration.class));
-                break;
-
-            case R.id.loginBtn:
-                userLogin();
-                break;
-
-            case R.id.forgotTxtView:
-                //startActivity(new Intent(this, ForgotPassword.class));
-                break;
-        }
-
     }
 
-    private void userLogin() {
-        String email=emailEditText.getText().toString().trim();
-        String password=passwordEditText.getText().toString().trim();
+//    @Override
+//    public void onClick(View v) {
+//
+//        switch (v.getId())
+//        {
+//            case R.id.registerTxtView:
+//                startActivity(new Intent(this, Registration.class));
+//                break;
+//
+//            case R.id.loginBtn:
+//                userLogin();
+//                break;
+//
+//            case R.id.forgotTxtView:
+//                //startActivity(new Intent(this, ForgotPassword.class));
+//                break;
+//        }
 
-        if(TextUtils.isEmpty(email)){
-            emailEditText.setError("Email is required");
-            return;
-        }
-        if(TextUtils.isEmpty(password)){
-            passwordEditText.setError("Password is required");
-            return;
-        }
-        if(password.length()<6){
-            passwordEditText.setError("Password should be more than or equal to 6 characters");
-            return;
-        }
-        progress.setVisibility(View.VISIBLE);
-        //authenticatation
 
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    Toast.makeText(MainActivity.this,"logged in successfully",Toast.LENGTH_SHORT).show();
 
-                    //Redirected to home page in case of successful login
-                   /// startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                }else {
-                    Toast.makeText(MainActivity.this,"Error"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                    progress.setVisibility(View.GONE);
-                }
-            }
-        });
-    }
+
 }
+
+
+
+//    private void userLogin() {
+//
+//    }
