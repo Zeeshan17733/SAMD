@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
+    tools:context=".Registration">
 
     <TextView
-        android:id="@+id/titleTxt"
+        android:id="@+id/registerTitleTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -28,105 +27,95 @@
         android:text="Your Daily Diary"
         android:textAlignment="center"
         android:textSize="20sp"
+        android:textStyle="italic"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleTxt" />
+        app:layout_constraintTop_toBottomOf="@id/registerTitleTxt" />
 
     <EditText
-        android:id="@+id/emailTxt"
+        android:id="@+id/nameTxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="55dp"
         android:ems="10"
-        android:drawableStart="@drawable/ic_baseline_email_24"
-        android:drawablePadding="10dp"
-        android:hint="Email Address"
+        android:hint="Enter Full Name"
+        android:inputType="textPersonName"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/descriptionTxt"
+        />
+
+    <EditText
+        android:id="@+id/ageTxt"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Age"
+        android:inputType="number"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameTxt" />
+
+    <EditText
+        android:id="@+id/registerEmailTxt"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descriptionTxt" />
+        app:layout_constraintTop_toBottomOf="@id/ageTxt" />
 
     <EditText
-        android:id="@+id/passwordTxt"
+        android:id="@+id/registerPasswordTxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
-        android:drawableStart="@drawable/ic_baseline_lock_24"
-        android:drawablePadding="10dp"
-        android:hint="Password"
+        android:hint="Enter Password"
         android:inputType="textPassword"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailTxt" />
+        app:layout_constraintTop_toBottomOf="@id/registerEmailTxt" />
 
-    <CheckBox
-        android:id="@+id/showPasswordBox"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:text="Show Password"
-        android:layout_marginStart="45dp"
-        android:textSize="20sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordTxt"
-        android:layout_marginTop="10dp"
-        >
 
-    </CheckBox>
 
     <Button
-        android:id="@+id/loginBtn"
+        android:id="@+id/registerBtn"
         android:layout_width="330dp"
         android:layout_height="70dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="25dp"
         android:backgroundTint="#E9AF1E"
-        android:text="Login"
+        android:text="Register"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/showPasswordBox" />
-
-    <TextView
-        android:id="@+id/forgotTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="25dp"
-        android:text="Forgot Password?"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginBtn" />
-
-    ♦
-
-    <TextView
-        android:id="@+id/registerTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="80dp"
-        android:text="Register"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toRightOf="@id/forgotTxtView"
-        app:layout_constraintTop_toTopOf="@id/forgotTxtView" />
+        app:layout_constraintTop_toBottomOf="@id/registerPasswordTxt" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyleLarge"
+        android:id="@+id/registerProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_centerInParent="true"
         android:visibility="gone"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
