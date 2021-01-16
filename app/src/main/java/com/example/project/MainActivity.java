@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -77,14 +78,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if(TextUtils.isEmpty(email)){
                     emailEditText.setError("Email is required");
+                    emailEditText.requestFocus();
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
                     passwordEditText.setError("Password is required");
+                    passwordEditText.requestFocus();
                     return;
                 }
                 if(password.length()<6){
                     passwordEditText.setError("Password should be more than or equal to 6 characters");
+                    passwordEditText.requestFocus();
                     return;
                 }
                 progress.setVisibility(View.VISIBLE);
@@ -94,14 +98,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(MainActivity.this,"logged in successfully",Toast.LENGTH_SHORT).show();
+                        if (task.isSuccessful())
+                        {
+                            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            if(user.isEmailVerified())
+                            {
+                                //startActivity(new Intent(MainActivity.this, Dashboard.class));
+                                progressBar.setVisibility(View.GONE);
 
-                            //Redirected to home page in case of successful login
-                            /// startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        }else {
-                            Toast.makeText(MainActivity.this,"Error"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                            progress.setVisibility(View.GONE);
+                            }
+                            else
+                            {
+                                user.sendEmailVerification();
+                                progressBar.setVisibility(View.GONE);
+                                Toast.makeText(MainActivity.this, "Check your email to verify your account",
+                                        Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                        else
+                        {
+                            Toast.makeText(MainActivity.this, "Failed to Login! Please check your credidentials",
+                                    Toast.LENGTH_LONG).show();
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
                 });
