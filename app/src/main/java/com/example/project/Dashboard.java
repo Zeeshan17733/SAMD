@@ -47,7 +47,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
             case R.id.dashBookTableBtn:
                 // add Booking
-
+                //goto table booking class
+                startActivity(new Intent(Dashboard.this, TableBooking.class));
+                finish();
                 break;
 
             case R.id.dashMyBookingsBtn:
