@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button BtnLogin;
     private ProgressBar progressBar;
     private CheckBox passwordCheck;
-    private ProgressBar progress;
     private FirebaseAuth auth;
 
     @Override
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         forgotPass = (TextView) findViewById(R.id.forgotTxtView);
         forgotPass.setOnClickListener(this);
 
-        progress=(ProgressBar)findViewById(R.id.loginProgress);
         BtnLogin = (Button) findViewById(R.id.loginBtn);
         BtnLogin.setOnClickListener(this);
         emailEditText =(EditText) findViewById(R.id.emailTxt);
@@ -91,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     passwordEditText.requestFocus();
                     return;
                 }
-                progress.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.VISIBLE);
                 //authenticatation
 
 
@@ -103,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             if(user.isEmailVerified())
                             {
-                                //startActivity(new Intent(MainActivity.this, Dashboard.class));
+                                startActivity(new Intent(MainActivity.this, Dashboard.class));
                                 progressBar.setVisibility(View.GONE);
 
                             }

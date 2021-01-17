@@ -3,6 +3,7 @@ package com.example.project;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -19,7 +20,7 @@ import java.util.Calendar;
 
 public class TableBooking extends AppCompatActivity {
 
-    EditText selectedDate;
+    EditText selectedDate,selectedTime;
     DatePickerDialog date;
     RadioButton indoorSelection, outdoorSelection;
     RadioGroup radioGroup;
@@ -37,7 +38,13 @@ public class TableBooking extends AppCompatActivity {
         submit = (Button) findViewById(R.id.checkBtn);
 
         selectedDate = (EditText) findViewById(R.id.bookingDate);
-        selectedDate.setInputType(InputType.TYPE_NULL);
+        selectedTime=(EditText)findViewById(R.id.bookingTime);
+        selectedTime.setInputType(InputType.TYPE_NULL);
+
+        //TODO
+        //Conditons on time edit text field
+
+
         selectedDate.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -52,6 +59,9 @@ public class TableBooking extends AppCompatActivity {
                     selectedDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                     },year,month,day);
+                date.getDatePicker().setMaxDate(System.currentTimeMillis()+60*60*24*7);
+
+                date.getDatePicker().setMinDate(cld.getTimeInMillis());
                 date.show();
             }
         });

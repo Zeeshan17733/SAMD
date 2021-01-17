@@ -32,18 +32,33 @@
         android:textAlignment="center"
         android:textSize="20sp"
          />
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
         <EditText
             android:id="@+id/bookingDate"
             android:layout_marginTop="30dp"
-            android:layout_width="200dp"
+            android:layout_width="170dp"
             android:layout_height="wrap_content"
             android:hint="Tap to select Date"
-            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            >
+
+        </EditText>
+        <EditText
+            android:id="@+id/bookingTime"
+            android:layout_marginTop="30dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content"
+            android:hint="Tap to select Time"
+            android:inputType="number"
+            android:layout_marginLeft="25dp"
             >
 
         </EditText>
 
+    </LinearLayout>
     <RadioGroup
         android:id="@+id/selectionGrp"
         android:layout_marginTop="10dp"
