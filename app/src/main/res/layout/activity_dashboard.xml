@@ -70,17 +70,6 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dashMyBookingsBtn" />
 
-    <TextView
-        android:id="@+id/dashChangePasswordTxtView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
-        android:layout_marginTop="25dp"
-        android:text="Change Password"
-        android:textSize="25sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dashMyProfileBtn" />
 
     <TextView
         android:id="@+id/dashLogoutTxtView"

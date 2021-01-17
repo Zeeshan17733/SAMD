@@ -46,18 +46,16 @@
             >
         </EditText>
 
-
-        <EditText
-            android:id="@+id/bookingTime"
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="15dp"
+            android:text="Select Time"
             android:layout_marginTop="30dp"
-            android:layout_width="170dp"
-            android:layout_height="wrap_content"
-            android:hint="Tap to select Time"
-            android:inputType="number"
-            android:layout_marginLeft="25dp"
-            >
+            android:entries="@array/spinnerItems"
+             />
 
-        </EditText>
 
     </LinearLayout>
     <RadioGroup

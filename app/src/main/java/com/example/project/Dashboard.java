@@ -2,6 +2,7 @@ package com.example.project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -29,10 +30,10 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
         logoutDash = (TextView) findViewById(R.id.dashLogoutTxtView);
         logoutDash.setOnClickListener(this);
 
-        changePassDash = (TextView) findViewById(R.id.dashChangePasswordTxtView);
-        changePassDash.setOnClickListener(this);
+
 
     }
+
 
     @Override
     public void onClick(View v) {
@@ -57,11 +58,7 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
                 break;
 
             case R.id.dashMyProfileBtn:
-                // my Profile
-                break;
-
-            case R.id.dashChangePasswordTxtView:
-                //change Password
+                startActivity(new Intent(Dashboard.this,MyProfile.class));
                 break;
 
         }

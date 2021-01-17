@@ -42,8 +42,7 @@ public class TableBooking extends AppCompatActivity {
         selectedTime=(EditText)findViewById(R.id.bookingTime);
         selectedTime.setInputType(InputType.TYPE_NULL);
 
-        //TODO
-        //Conditons on time edit text field
+
 
 
         selectedDate.setOnClickListener(new View.OnClickListener()
@@ -60,42 +59,27 @@ public class TableBooking extends AppCompatActivity {
                     selectedDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
                     }
                     },year,month,day);
-                date.getDatePicker().setMaxDate(System.currentTimeMillis()+60*60*24*7);
-
+                long now = System.currentTimeMillis() - 1000;
                 date.getDatePicker().setMinDate(cld.getTimeInMillis());
+                date.getDatePicker().setMaxDate(now+(1000*60*60*24*7));
+                
                 date.show();
             }
         });
 
-        selectedTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int mHour = c.get(Calendar.HOUR_OF_DAY);
-                int mMinute = c.get(Calendar.MINUTE);
-
-                TimePickerDialog tpd = new TimePickerDialog(TableBooking.this, //same Activity Context like before
-                        new TimePickerDialog.OnTimeSetListener() {
-
-                            @Override
-                            public void onTimeSet(TimePicker view, int hourOfDay,
-                                                  int minute) {
-                                selectedTime.setText(hourOfDay + ":" + minute); //You set the time for the EditText created
-                            }
-                        }, mHour, mMinute, false);
-                tpd.show();
-            }
-        });
 
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String time=selectedTime.getText().toString().trim();
                 String bookingDate = selectedDate.getText().toString().trim();
                 if(TextUtils.isEmpty(bookingDate))
                 {
                     selectedDate.setError("select a date");
                     return;
+                }
+                if(TextUtils.isEmpty(time)){
+                    selectedTime.setError("Please Select time for reservation");
                 }
                 if (radioGroup.getCheckedRadioButtonId() == -1)
                 {
