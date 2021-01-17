@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TimePicker;
 
 import java.util.Calendar;
 
@@ -65,6 +66,27 @@ public class TableBooking extends AppCompatActivity {
                 date.show();
             }
         });
+
+        selectedTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+                int mHour = c.get(Calendar.HOUR_OF_DAY);
+                int mMinute = c.get(Calendar.MINUTE);
+
+                TimePickerDialog tpd = new TimePickerDialog(TableBooking.this, //same Activity Context like before
+                        new TimePickerDialog.OnTimeSetListener() {
+
+                            @Override
+                            public void onTimeSet(TimePicker view, int hourOfDay,
+                                                  int minute) {
+                                selectedTime.setText(hourOfDay + ":" + minute); //You set the time for the EditText created
+                            }
+                        }, mHour, mMinute, false);
+                tpd.show();
+            }
+        });
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
