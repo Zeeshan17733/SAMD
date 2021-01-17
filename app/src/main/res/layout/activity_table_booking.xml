@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,42 +9,77 @@
     android:orientation="vertical"
     tools:context=".TableBooking">
 
-    <LinearLayout
-        android:id="@+id/first"
+    <TextView
+        android:id="@+id/dashTitleTxt"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#E91E63"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-black"
+        android:text="E-Hotel"
+        android:textAlignment="center"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/dashDescriptionTxt"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Table Reservation"
+        android:textAlignment="center"
+        android:textSize="20sp"
+         />
 
-        <DatePicker
-            android:id="@+id/datePicker1"
+        <EditText
+            android:id="@+id/bookingDate"
+            android:layout_marginTop="30dp"
             android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:backgroundTint="#E91E63"
-            android:datePickerMode="calendar" />
+            android:layout_height="wrap_content"
+            android:hint="Tap to select Date"
+            android:layout_gravity="center"
+            >
+
+        </EditText>
+
+    <RadioGroup
+        android:id="@+id/selectionGrp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        >
+
+        <RadioButton
+            android:id="@+id/indoorRadio"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Indoor">
+        </RadioButton>
+
+        <RadioButton
+            android:id="@+id/outdoorRadio"
+            android:layout_marginLeft="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Outdoor">
+        </RadioButton>
 
         <Button
-            android:id="@+id/button3"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginLeft="5dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center"
+            android:id="@+id/checkBtn"
+            android:layout_width="100dp"
+            android:layout_height="70dp"
             android:text="Check">
 
         </Button>
 
-    </LinearLayout>
+    </RadioGroup>
 
 
-
-</RelativeLayout>
+</LinearLayout>
