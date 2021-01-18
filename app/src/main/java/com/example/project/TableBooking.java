@@ -28,7 +28,7 @@ public class TableBooking extends AppCompatActivity {
     RadioButton indoorSelection, outdoorSelection;
     RadioGroup radioGroup;
     Button submit;
-
+    String time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +73,7 @@ public class TableBooking extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String time=spinner.getSelectedItem().toString().trim();
+                time = spinner.getSelectedItem().toString().trim();
                 String bookingDate = selectedDate.getText().toString().trim();
                 if(TextUtils.isEmpty(bookingDate))
                 {
@@ -88,15 +88,17 @@ public class TableBooking extends AppCompatActivity {
                 }
                 else if (indoorSelection.isChecked())
                 {
-                    Intent intent = new Intent(TableBooking.this, Indoor.class);
+                    Intent intent = new Intent(getApplicationContext(), Indoor.class);
                     intent.putExtra("date", bookingDate);
+                    intent.putExtra("time", time);
                     startActivity(intent);
                     finish();
                 }
                 else
                 {
-                    Intent intent = new Intent(TableBooking.this, Outdoor.class);
+                    Intent intent = new Intent(getApplicationContext(), Outdoor.class);
                     intent.putExtra("date", bookingDate);
+                    intent.putExtra("time", time);
                     startActivity(intent);
                     finish();
                 }
