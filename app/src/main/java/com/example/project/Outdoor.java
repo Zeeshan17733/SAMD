@@ -4,10 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,9 +27,14 @@ public class Outdoor extends AppCompatActivity {
     Button continueBtn;
     String date, time;
 
+
+
     FirebaseAuth auth;
     FirebaseFirestore store;
     String userId,name,email,phoneNumber;
+
+    String tableNumber;
+//    ImageButton tableOne,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +48,66 @@ public class Outdoor extends AppCompatActivity {
         tableFive = (ImageButton) findViewById(R.id.tableFiveOutdoor);
 
         continueBtn = (Button) findViewById(R.id.continueButton);
+
+        tableOne.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableOne.setBackgroundColor(Color.GREEN);
+                tableTwo.setBackgroundColor(Color.WHITE);
+                tableThree.setBackgroundColor(Color.WHITE);
+                tableFour.setBackgroundColor(Color.WHITE);
+                tableFive.setBackgroundColor(Color.WHITE);
+                tableNumber = "1";
+            }
+        });
+
+        tableTwo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableTwo.setBackgroundColor(Color.GREEN);
+                tableOne.setBackgroundColor(Color.WHITE);
+                tableThree.setBackgroundColor(Color.WHITE);
+                tableFour.setBackgroundColor(Color.WHITE);
+                tableFive.setBackgroundColor(Color.WHITE);
+                tableNumber = "2";
+            }
+        });
+
+        tableThree.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableOne.setBackgroundColor(Color.WHITE);
+                tableTwo.setBackgroundColor(Color.WHITE);
+                tableThree.setBackgroundColor(Color.GREEN);
+                tableFour.setBackgroundColor(Color.WHITE);
+                tableFive.setBackgroundColor(Color.WHITE);
+                tableNumber = "3";
+            }
+        });
+
+        tableFour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableOne.setBackgroundColor(Color.WHITE);
+                tableTwo.setBackgroundColor(Color.WHITE);
+                tableThree.setBackgroundColor(Color.WHITE);
+                tableFour.setBackgroundColor(Color.GREEN);
+                tableFive.setBackgroundColor(Color.WHITE);
+                tableNumber = "4";
+            }
+        });
+
+        tableFive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tableOne.setBackgroundColor(Color.WHITE);
+                tableTwo.setBackgroundColor(Color.WHITE);
+                tableThree.setBackgroundColor(Color.WHITE);
+                tableFour.setBackgroundColor(Color.WHITE);
+                tableFive.setBackgroundColor(Color.GREEN);
+                tableNumber = "5";
+            }
+        });
 
         //tableOne.setClickable(false);
         date = getIntent().getStringExtra("date");
@@ -72,7 +139,7 @@ public class Outdoor extends AppCompatActivity {
                 map.put("Ph # ", phoneNumber);
                 map.put("Date", date);
                 map.put("Time", time);
-                map.put("Table # ", "xyz");
+                map.put("Table # ", tableNumber);
 
                 FirebaseDatabase.getInstance().getReference().child("Reservations").
                         child("Outdoor").updateChildren(map);
