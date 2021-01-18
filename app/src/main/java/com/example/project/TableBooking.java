@@ -15,14 +15,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TimePicker;
 
 import java.util.Calendar;
 
 public class TableBooking extends AppCompatActivity {
 
-    EditText selectedDate,selectedTime;
+    EditText selectedDate;
     DatePickerDialog date;
+    Spinner spinner;
     RadioButton indoorSelection, outdoorSelection;
     RadioGroup radioGroup;
     Button submit;
@@ -39,9 +41,9 @@ public class TableBooking extends AppCompatActivity {
         submit = (Button) findViewById(R.id.checkBtn);
 
         selectedDate = (EditText) findViewById(R.id.bookingDate);
-        selectedTime=(EditText)findViewById(R.id.bookingTime);
-        selectedTime.setInputType(InputType.TYPE_NULL);
-
+        //selectedTime=(EditText)findViewById(R.id.bookingTime);
+        //selectedTime.setInputType(InputType.TYPE_NULL);
+        spinner=(Spinner) findViewById(R.id.spinner);
 
 
 
@@ -71,16 +73,14 @@ public class TableBooking extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String time=selectedTime.getText().toString().trim();
+                String time=spinner.getSelectedItem().toString().trim();
                 String bookingDate = selectedDate.getText().toString().trim();
                 if(TextUtils.isEmpty(bookingDate))
                 {
                     selectedDate.setError("select a date");
                     return;
                 }
-                if(TextUtils.isEmpty(time)){
-                    selectedTime.setError("Please Select time for reservation");
-                }
+
                 if (radioGroup.getCheckedRadioButtonId() == -1)
                 {
                     indoorSelection.setError("Check any radio button");
