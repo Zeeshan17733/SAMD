@@ -19,7 +19,7 @@
         <LinearLayout
             android:id="@+id/third"
             android:layout_width="match_parent"
-            android:layout_height="220dp"
+            android:layout_height="235dp"
             android:layout_marginStart="5dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
@@ -40,7 +40,7 @@
                 android:layout_width="230dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="15dp"
                 android:src="@drawable/four">
 
             </ImageButton>
@@ -68,10 +68,10 @@
 
             <ImageButton
                 android:id="@+id/tableFourOutdoor"
-                android:layout_width="230dp"
+                android:layout_width="240dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginLeft="5dp"
+                android:layout_marginLeft="15dp"
                 android:src="@drawable/four">
 
             </ImageButton>
@@ -86,6 +86,14 @@
             android:src="@drawable/twooo">
 
         </ImageButton>
+
+        <Button
+            android:layout_marginTop="15dp"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Continue">
+        </Button>
 
 
     </LinearLayout>

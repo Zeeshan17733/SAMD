@@ -4,15 +4,15 @@
         <item>10AM</item>
         <item>11AM</item>
         <item>12PM</item>
-        <item>1PM</item>
-        <item>2PM</item>
-        <item>3PM</item>
-        <item>4PM</item>
-        <item>5PM</item>
-        <item>6PM</item>
-        <item>7PM</item>
-        <item>8PM</item>
-        <item>9PM</item>
+        <item>01PM</item>
+        <item>02PM</item>
+        <item>03PM</item>
+        <item>04PM</item>
+        <item>05PM</item>
+        <item>06PM</item>
+        <item>07PM</item>
+        <item>08PM</item>
+        <item>09PM</item>
         <item>10PM</item>
     </string-array>
 </resources>

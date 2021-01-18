@@ -44,6 +44,11 @@ public class MyProfile extends AppCompatActivity {
         back=(Button)findViewById(R.id.backBtn);
         logout=(Button)findViewById(R.id.logout);
         user=auth.getCurrentUser();
+        Intent d=getIntent();
+        name.setText(d.getStringExtra("name"));
+        email.setText(d.getStringExtra("email"));
+        phoneNumber.setText(d.getStringExtra("phone"));
+        age.setText(d.getStringExtra("age"));
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
