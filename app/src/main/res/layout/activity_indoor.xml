@@ -18,6 +18,7 @@
             android:background="#FFFFFF"
             android:orientation="vertical">
 
+            
             <LinearLayout
                 android:id="@+id/third"
                 android:layout_width="370dp"
