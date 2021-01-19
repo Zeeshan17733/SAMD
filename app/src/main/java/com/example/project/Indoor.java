@@ -161,40 +161,20 @@ public class Indoor extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                final DatabaseReference mDatabaseRef = database.getReference().child("Reservation").child("Indoor");
-//                mDatabaseRef.orderByChild("date_time").equalTo(date,time).addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                        for(DataSnapshot d: data.getChildren()){
-//                            yourClass work = d.getValue(yourClass.class);
-//                            if(work.getGender().equals("Male"){
-//                                double salary = work.getSalary();
-//                                if(salary  > 5000 && salary < 15000){
-//                                    //save the worker into a list.
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError error) {
-//
-//                    }
-//
-//            });
-                mDatabaseRef.orderByChild("date_time").equalTo(date,time).addListenerForSingleValueEvent(new ValueEventListener() {
+                final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
+                mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
                             table1 = userSnapshot.child("tableNumber").getValue(String.class);
-                            date1 = dataSnapshot.child("date").getValue(String.class);
-                            time1=dataSnapshot.child("time").getValue(String.class);
+                            date1 = userSnapshot.child("date").getValue().toString();
+                            time1=userSnapshot.child("time").getValue(String.class);
                             if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
                                 Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
                             }
                         }
 
-                        Toast.makeText(Indoor.this,table1,Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
 
                     }
 
