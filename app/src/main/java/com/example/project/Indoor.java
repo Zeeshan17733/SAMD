@@ -1,5 +1,6 @@
 package com.example.project;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,17 +11,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.auth.User;
 
 import java.util.HashMap;
 
@@ -36,6 +43,7 @@ public class Indoor extends AppCompatActivity {
     DatabaseReference reference;
     String userId,name,email,phoneNumber;
     String tableNumber;
+    String table1,date1,time1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +160,50 @@ public class Indoor extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+
+                final DatabaseReference mDatabaseRef = database.getReference().child("Reservation").child("Indoor");
+//                mDatabaseRef.orderByChild("date_time").equalTo(date,time).addListenerForSingleValueEvent(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                        for(DataSnapshot d: data.getChildren()){
+//                            yourClass work = d.getValue(yourClass.class);
+//                            if(work.getGender().equals("Male"){
+//                                double salary = work.getSalary();
+//                                if(salary  > 5000 && salary < 15000){
+//                                    //save the worker into a list.
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                    }
+//
+//            });
+                mDatabaseRef.orderByChild("date_time").equalTo(date,time).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            table1 = userSnapshot.child("tableNumber").getValue(String.class);
+                            date1 = dataSnapshot.child("date").getValue(String.class);
+                            time1=dataSnapshot.child("time").getValue(String.class);
+                            if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
+                                Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        Toast.makeText(Indoor.this,table1,Toast.LENGTH_SHORT).show();
+
+                    }
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber);
 
                 DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor").child(userId);
@@ -161,7 +213,9 @@ public class Indoor extends AppCompatActivity {
 
 
             }
-        });
+
+
+                });
 
     }
 }
