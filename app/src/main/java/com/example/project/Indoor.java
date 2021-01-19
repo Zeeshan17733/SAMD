@@ -3,13 +3,18 @@ package com.example.project;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +32,8 @@ public class Indoor extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseFirestore store;
-
+    FirebaseDatabase database;
+    DatabaseReference reference;
     String userId,name,email,phoneNumber;
     String tableNumber;
 
@@ -129,8 +135,8 @@ public class Indoor extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
-
-
+        database=FirebaseDatabase.getInstance();
+        reference=database.getReference();
         userId=auth.getCurrentUser().getUid();
         DocumentReference documentReference=store.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -145,16 +151,15 @@ public class Indoor extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("Name", name);
-                map.put("Email", email);
-                map.put("Ph # ", phoneNumber);
-                map.put("Date", date);
-                map.put("Time", time);
-                map.put("Table # ", tableNumber);
 
-                FirebaseDatabase.getInstance().getReference().child("Reservations").
-                        child("Indoor").updateChildren(map);
+                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber);
+
+                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor").child(userId);
+                databaseReference.setValue(saveData);
+
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+
+
             }
         });
 

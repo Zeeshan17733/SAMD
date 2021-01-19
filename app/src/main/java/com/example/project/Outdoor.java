@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -31,6 +32,7 @@ public class Outdoor extends AppCompatActivity {
 
     FirebaseAuth auth;
     FirebaseFirestore store;
+    FirebaseDatabase database;
     String userId,name,email,phoneNumber;
 
     String tableNumber;
@@ -133,16 +135,11 @@ public class Outdoor extends AppCompatActivity {
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("Name", name);
-                map.put("Email", email);
-                map.put("Ph # ", phoneNumber);
-                map.put("Date", date);
-                map.put("Time", time);
-                map.put("Table # ", tableNumber);
+                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber);
 
-                FirebaseDatabase.getInstance().getReference().child("Reservations").
-                        child("Outdoor").updateChildren(map);
+                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Outdoor").child(userId);
+                databaseReference.setValue(saveData);
+                startActivity(new Intent(getApplicationContext(), Dashboard.class));
             }
         });
 
