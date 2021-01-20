@@ -37,7 +37,7 @@ public class InformationAdapter extends RecyclerView.Adapter<InformationAdapter.
         holder.textViewEmail.setText("Email: "+info.email);
         holder.textViewPh.setText("Phone: "+info.phone);
         holder.textViewDate.setText("Date: "+info.date);
-        holder.textViewSeating.setText(info.seating);
+        holder.textViewSeating.setText("Area: "+info.seating);
     }
 
     @Override
