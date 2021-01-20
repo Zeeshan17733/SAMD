@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Registration">
 
     <TextView
@@ -21,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:layout_gravity="center"
         android:id="@+id/descriptionTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,67 +35,62 @@
         app:layout_constraintTop_toBottomOf="@id/registerTitleTxt" />
 
     <EditText
+        android:layout_gravity="center"
         android:id="@+id/nameTxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="30dp"
         android:ems="10"
         android:hint="Enter Full Name"
         android:inputType="textPersonName"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descriptionTxt"
         />
 
     <EditText
+        android:layout_gravity="center"
         android:id="@+id/ageTxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="Age"
         android:inputType="number"
         android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameTxt" />
+        android:textStyle="bold" />
 
     <EditText
+        android:layout_gravity="center"
         android:id="@+id/registerEmailTxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:hint="Email"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ageTxt" />
+        />
 
 
     <EditText
+        android:layout_margin="5dp"
         android:id="@+id/registerPhoneTxt"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:ems="10"
+        app:layout_constraintBottom_toBottomOf="@+id/registerEmailTxt"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         android:hint="Enter Phone Number"
         android:inputType="number"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.52" />
+         />
 
     <Button
+        android:layout_gravity="center"
         android:id="@+id/saveBtn"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
@@ -102,29 +99,35 @@
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.56"
+        app:layout_constraintHorizontal_bias="0.561"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65999997" />
-
+        app:layout_constraintVertical_bias="0.618" />
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <Button
+        android:layout_marginTop="10dp"
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="30dp"
         android:backgroundTint="#E9AF1E"
         android:text="Back"
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
+        app:layout_constraintVertical_bias="0.751" />
 
     <Button
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="125dp"
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
@@ -133,10 +136,10 @@
         android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.91"
+        app:layout_constraintHorizontal_bias="0.892"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.81" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintVertical_bias="0.751" />
+    </LinearLayout>
+</LinearLayout>
