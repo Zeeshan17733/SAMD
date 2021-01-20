@@ -109,7 +109,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <Button
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="7dp"
         android:id="@+id/backBtn"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
@@ -127,7 +127,7 @@
 
     <Button
         android:layout_marginTop="10dp"
-        android:layout_marginLeft="125dp"
+        android:layout_marginLeft="115dp"
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="70dp"

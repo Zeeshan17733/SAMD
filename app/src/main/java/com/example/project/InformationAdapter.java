@@ -35,7 +35,7 @@ public class InformationAdapter extends RecyclerView.Adapter<InformationAdapter.
         holder.textViewTable.setText("Table Number: "+info.tableNumber);
         holder.textViewTime.setText("Time: "+info.time);
         holder.textViewEmail.setText("Email: "+info.email);
-        holder.textViewPh.setText("Phone: "+info.phone);
+        //holder.textViewPh.setText("Phone: "+info.phone);
         holder.textViewDate.setText("Date: "+info.date);
         holder.textViewSeating.setText("Area: "+info.seating);
     }

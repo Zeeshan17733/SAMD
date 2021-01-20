@@ -158,68 +158,54 @@ public class Indoor extends AppCompatActivity {
             }
         });
 
-        final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
-        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    table1 = userSnapshot.child("tableNumber").getValue(String.class);
-                    date1 = userSnapshot.child("date").getValue().toString();
-                    time1=userSnapshot.child("time").getValue(String.class);
-                    if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
-                        //       Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
-                        if (table1.equals("1"))
-                        {
-                            tableOne.setClickable(false);
-                            tableOne.setEnabled(false);
-                        }
-                        if (table1.equals("2"))
-                        {
-                            tableTwo.setEnabled(false);
-                            tableTwo.setClickable(false);
-                        }
-                        if (table1.equals("3"))
-                        {
-                            tableThree.setClickable(false);
-                        }
-                        if (table1.equals("4"))
-                        {
-                            tableFour.setClickable(false);
-                        }
-                        if (table1.equals("5"))
-                        {
-                            tableFive.setClickable(false);
-                        }
-                        if (table1.equals("6"))
-                        {
-                            tableSix.setClickable(false);
 
-                        }
-                    }
-                }
-            }
-
-            // Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
-
-
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
+                mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            table1 = userSnapshot.child("tableNumber").getValue(String.class);
+                            date1 = userSnapshot.child("date").getValue().toString();
+                            time1=userSnapshot.child("time").getValue(String.class);
+                            if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
+                                Toast.makeText(Indoor.this,"Table not available",Toast.LENGTH_LONG).show();
+                                return;
+                            }
+                            else
+                            {
+                                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Indoor");
+                                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor");
+                                databaseReference.push().setValue(saveData);
+                                Toast.makeText(Indoor.this,"Table has been booked",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                                break;
+                            }
+                        }
+                    }
+
+                    // Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
 
 
-                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Indoor");
-                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor");
-                databaseReference.push().setValue(saveData);
-                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+                ////////////////////////////
+
+//                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Indoor");
+  //              DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor");
+    //            databaseReference.push().setValue(saveData);
+      //          startActivity(new Intent(getApplicationContext(), Dashboard.class));
 
 
             }
