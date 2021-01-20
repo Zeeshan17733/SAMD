@@ -88,6 +88,9 @@ public class MyBookings extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
                 }
+                else{
+                    Toast.makeText(MyBookings.this, "No Bookings", Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override

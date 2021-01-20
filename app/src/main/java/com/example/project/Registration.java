@@ -92,19 +92,8 @@ public class Registration extends AppCompatActivity {
                             user.put("Email",email);
                             user.put("Age",age);
                             user.put("Phone Number",phone);
-                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-
-
-                                }
-                            });
-
-
-                            // TODO
-
-
-                           ///// startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                            progress.setVisibility(View.GONE);
                         }else {
                             Toast.makeText(Registration.this,"Error"+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
                             progress.setVisibility(View.GONE);
