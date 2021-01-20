@@ -67,7 +67,7 @@ public class MyProfile extends AppCompatActivity {
                         edited.put("Phone Number",phoneNumber.getText().toString());
                         edited.put("Age",age.getText().toString());
                         doc.update(edited);
-                        Toast.makeText(MyProfile.this,"Email is changed",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MyProfile.this,"Profile Updated",Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

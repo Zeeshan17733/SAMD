@@ -139,61 +139,50 @@ public class Outdoor extends AppCompatActivity {
             }
         });
 
-        final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
-        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    table1 = userSnapshot.child("tableNumber").getValue(String.class);
-                    date1 = userSnapshot.child("date").getValue().toString();
-                    time1=userSnapshot.child("time").getValue(String.class);
-                    if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
-                        //       Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
-                        if (table1.equals("1"))
-                        {
-                            tableOne.setClickable(false);
-                            tableOne.setEnabled(false);
-                        }
-                        if (table1.equals("2"))
-                        {
-                            tableTwo.setEnabled(false);
-                            tableTwo.setClickable(false);
-                        }
-                        if (table1.equals("3"))
-                        {
-                            tableThree.setClickable(false);
-                        }
-                        if (table1.equals("4"))
-                        {
-                            tableFour.setClickable(false);
-                        }
-                        if (table1.equals("5"))
-                        {
-                            tableFive.setClickable(false);
-                        }
 
-                    }
-                }
-            }
-
-            // Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
-
-
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Outdoor");
-                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Outdoor");
-                databaseReference.push().setValue(saveData);
-                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
+                mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                            table1 = userSnapshot.child("tableNumber").getValue(String.class);
+                            date1 = userSnapshot.child("date").getValue().toString();
+                            time1=userSnapshot.child("time").getValue(String.class);
+                            if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
+                                       Toast.makeText(Outdoor.this,"Table not available",Toast.LENGTH_SHORT).show();
+                                       return;
+
+                            }
+                            else
+                            {
+                                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Outdoor");
+                                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Outdoor");
+                                databaseReference.push().setValue(saveData);
+                                Toast.makeText(Outdoor.this,"Table has been booked",Toast.LENGTH_LONG).show();
+                                startActivity(new Intent(getApplicationContext(), Dashboard.class));
+                                break;
+                            }
+
+                        }
+                    }
+
+                    // Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
+
+
+
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                ///////////////////////
+
             }
         });
 
