@@ -1,5 +1,6 @@
 package com.example.project;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,8 +13,11 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -29,11 +33,13 @@ public class Outdoor extends AppCompatActivity {
     String date, time;
 
 
+    String table1,date1,time1;
 
     FirebaseAuth auth;
     FirebaseFirestore store;
     FirebaseDatabase database;
     String userId,name,email,phoneNumber;
+    DatabaseReference reference;
 
     String tableNumber;
 //    ImageButton tableOne,
@@ -119,6 +125,8 @@ public class Outdoor extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
 
+        database=FirebaseDatabase.getInstance();
+        reference=database.getReference();
 
         userId=auth.getCurrentUser().getUid();
         DocumentReference documentReference=store.collection("users").document(userId);
@@ -127,18 +135,64 @@ public class Outdoor extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                 name=value.getString("Full Name");
                 email=value.getString("Email");
-                //age=value.getString("Age");
                 phoneNumber=value.getString("Phone Number");
+            }
+        });
+
+        final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    table1 = userSnapshot.child("tableNumber").getValue(String.class);
+                    date1 = userSnapshot.child("date").getValue().toString();
+                    time1=userSnapshot.child("time").getValue(String.class);
+                    if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
+                        //       Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
+                        if (table1.equals("1"))
+                        {
+                            tableOne.setClickable(false);
+                            tableOne.setEnabled(false);
+                        }
+                        if (table1.equals("2"))
+                        {
+                            tableTwo.setEnabled(false);
+                            tableTwo.setClickable(false);
+                        }
+                        if (table1.equals("3"))
+                        {
+                            tableThree.setClickable(false);
+                        }
+                        if (table1.equals("4"))
+                        {
+                            tableFour.setClickable(false);
+                        }
+                        if (table1.equals("5"))
+                        {
+                            tableFive.setClickable(false);
+                        }
+
+                    }
+                }
+            }
+
+            // Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
 
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber);
-
-                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Outdoor").child(userId);
-                databaseReference.setValue(saveData);
+                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Outdoor");
+                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Outdoor");
+                databaseReference.push().setValue(saveData);
                 startActivity(new Intent(getApplicationContext(), Dashboard.class));
             }
         });

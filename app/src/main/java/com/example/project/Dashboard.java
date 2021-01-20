@@ -77,6 +77,9 @@ public class Dashboard extends AppCompatActivity implements View.OnClickListener
 
             case R.id.dashMyBookingsBtn:
                 //my Bookings
+                Intent in=new Intent(Dashboard.this,MyBookings.class);
+                in.putExtra("email",email);
+                startActivity(in);
                 break;
 
             case R.id.dashMyProfileBtn:
