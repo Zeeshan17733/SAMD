@@ -174,10 +174,12 @@ public class Indoor extends AppCompatActivity {
                             time1=userSnapshot.child("time").getValue(String.class);
                             if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
                                 Toast.makeText(Indoor.this,"Table not available",Toast.LENGTH_LONG).show();
-                                return;
+                                break;
                             }
                             else
                             {
+                                //todo else is running though if is there creating multiple booking
+                                //This error is to be resolved
                                 SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Indoor");
                                 DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor");
                                 databaseReference.push().setValue(saveData);

@@ -159,6 +159,8 @@ public class Outdoor extends AppCompatActivity {
                             }
                             else
                             {
+                                //todo else is running though if is there creating multiple booking
+                                //This error is to be resolved
                                 SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Outdoor");
                                 DatabaseReference databaseReference = database.getReference().child("Reservations").child("Outdoor");
                                 databaseReference.push().setValue(saveData);
