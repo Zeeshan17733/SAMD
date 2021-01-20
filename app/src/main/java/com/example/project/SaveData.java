@@ -7,14 +7,16 @@ public class SaveData {
     private String date;
     private String time;
     private String tableNumber;
+    private String seating;
 
-    public SaveData(String name, String email, String phoneNumber, String date, String time, String tableNumber) {
+    public SaveData(String name, String email, String phoneNumber, String date, String time, String tableNumber, String seating) {
         Name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.date = date;
         this.time = time;
         this.tableNumber = tableNumber;
+        this.seating = seating;
     }
     public String getName() {
         return Name;
@@ -64,6 +66,13 @@ public class SaveData {
         this.tableNumber = tableNumber;
     }
 
+    public String getSeating() {
+        return seating;
+    }
+
+    public void setSeating(String seating) {
+        this.seating = seating;
+    }
 
 
 }

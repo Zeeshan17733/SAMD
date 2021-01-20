@@ -50,7 +50,6 @@ public class Indoor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_indoor);
 
-
         tableOne = (ImageButton) findViewById(R.id.tableOneIndoor);
         tableTwo = (ImageButton) findViewById(R.id.tableTwoIndoor);
         tableThree = (ImageButton) findViewById(R.id.tableThreeIndoor);
@@ -59,56 +58,6 @@ public class Indoor extends AppCompatActivity {
         tableSix = (ImageButton) findViewById(R.id.tableSixIndoor);
 
         continueBtn = (Button) findViewById(R.id.continueIndoorButton);
-
-        //Checking Bookings image Button
-        final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
-        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
-                    table1 = userSnapshot.child("tableNumber").getValue(String.class);
-                    date1 = userSnapshot.child("date").getValue().toString();
-                    time1=userSnapshot.child("time").getValue(String.class);
-                    if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
-                        //Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
-                        if (table1.equals("1"))
-                        {
-                            tableOne.setClickable(false);
-                        }
-                        if (table1.equals("2"))
-                        {
-                            tableTwo.setClickable(false);
-                        }
-                        if (table1.equals("3"))
-                        {
-                            tableThree.setClickable(false);
-                        }
-                        if (table1.equals("4"))
-                        {
-                            tableFour.setClickable(false);
-                        }
-                        if (table1.equals("5"))
-                        {
-                            tableFive.setClickable(false);
-                        }
-                        if (table1.equals("6"))
-                        {
-                            tableSix.setClickable(false);
-                        }
-                    }
-                }
-
-                Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
-
-            }
-
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
         tableOne.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,8 +143,10 @@ public class Indoor extends AppCompatActivity {
 
         auth=FirebaseAuth.getInstance();
         store=FirebaseFirestore.getInstance();
+
         database=FirebaseDatabase.getInstance();
         reference=database.getReference();
+
         userId=auth.getCurrentUser().getUid();
         DocumentReference documentReference=store.collection("users").document(userId);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
@@ -207,24 +158,74 @@ public class Indoor extends AppCompatActivity {
             }
         });
 
+        final DatabaseReference mDatabaseRef = database.getReference().child("Reservations").child("Indoor");
+        mDatabaseRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                    table1 = userSnapshot.child("tableNumber").getValue(String.class);
+                    date1 = userSnapshot.child("date").getValue().toString();
+                    time1=userSnapshot.child("time").getValue(String.class);
+                    if(table1.equals(tableNumber)&&date1.equals(date)&& time1.equals(time) ){
+                        //       Toast.makeText(Indoor.this,"Table already booked",Toast.LENGTH_SHORT).show();
+                        if (table1.equals("1"))
+                        {
+                            tableOne.setClickable(false);
+                            tableOne.setEnabled(false);
+                        }
+                        if (table1.equals("2"))
+                        {
+                            tableTwo.setEnabled(false);
+                            tableTwo.setClickable(false);
+                        }
+                        if (table1.equals("3"))
+                        {
+                            tableThree.setClickable(false);
+                        }
+                        if (table1.equals("4"))
+                        {
+                            tableFour.setClickable(false);
+                        }
+                        if (table1.equals("5"))
+                        {
+                            tableFive.setClickable(false);
+                        }
+                        if (table1.equals("6"))
+                        {
+                            tableSix.setClickable(false);
+
+                        }
+                    }
+                }
+            }
+
+            // Toast.makeText(Indoor.this,date1,Toast.LENGTH_SHORT).show();
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
 
-                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber);
-
-                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor").child(userId);
-                databaseReference.setValue(saveData);
-
+                SaveData saveData=new SaveData(name,email,phoneNumber,date,time,tableNumber, "Indoor");
+                DatabaseReference databaseReference = database.getReference().child("Reservations").child("Indoor");
+                databaseReference.push().setValue(saveData);
                 startActivity(new Intent(getApplicationContext(), Dashboard.class));
 
 
             }
 
 
-                });
+        });
 
     }
 }
